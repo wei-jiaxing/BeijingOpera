@@ -40,6 +40,7 @@ public class FluctuationSpawner : MonoBehaviour
         music = GameManager.Instance.music;
         audioSource = music.GetComponent<AudioSource>();
 		_noteObjs.Clear();
+		removeLines.Clear();
 //        bmp = _bmp;
 //        startTime = _startTime;
 //        endTime = _endTime;
@@ -99,22 +100,34 @@ public class FluctuationSpawner : MonoBehaviour
 //
 //            }
 
-
+			foreach (var keyValue in removeLines)
+			{
+				Debug.DrawLine(
+					new Vector3(keyValue.Key, -1, 0),
+					new Vector3(keyValue.Key, 1, 0),
+					keyValue.Value
+				);
+			}
 		}
 	}
 
-	public void SpawnFluctuation(int index)
+	public void SpawnFluctuation(int index, float deltaTime)
 	{
-		GameObject go3 = Instantiate(fluctuation, fluctuationPoint.position, Quaternion.identity);
+		Vector3 pos = fluctuationPoint.position;
+		pos.x += deltaTime * fluctuationSpeed;
+		GameObject go3 = Instantiate(fluctuation, pos, Quaternion.identity);
 		go3.GetComponent<Fluctuation>().Init(index, fluctuationSpeed);
 		_noteObjs.Add(index, go3);
 		nextPointIndex++;
 	}
 
-	public void RemoveFluctuation(int index)
+	Dictionary<float, Color> removeLines = new Dictionary<float, Color>();
+
+	public void RemoveFluctuation(int index, Color color = default(Color))
 	{
 		if (_noteObjs.ContainsKey(index))
 		{
+			removeLines[_noteObjs[index].transform.position.x] = color;
 			GameObject.Destroy(_noteObjs[index]);
 			_noteObjs.Remove(index);
 		}
