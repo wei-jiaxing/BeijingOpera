@@ -4,29 +4,23 @@ using UnityEngine;
 
 public class Fluctuation : MonoBehaviour 
 {
+	private int index;
 	private float speed;
-
-
-
-	void Start () 
-	{
-		
-	}
-	
 
 	void FixedUpdate () 
 	{
 		transform.Translate(Vector2.right * speed * Time.fixedDeltaTime);
 	}
 
-	public void Init(float speed)
+	public void Init(int index, float speed)
 	{
+		this.index = index;
 		this.speed = speed;
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		Destroy(gameObject);
+		GameManager.Instance.fluctuationSpawner.RemoveFluctuation(index);
 	}
 
 	void OnDrawGizmos()

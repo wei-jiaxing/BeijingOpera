@@ -103,7 +103,7 @@ public class Music : MonoBehaviour
 		{
 			Debug.LogWarning("Spawn: " + _showNoteIndex + " |at time: " + audioSource.time);
 
-			GenerateFluction();
+			GenerateFluction(_showNoteIndex);
 		}
 
 
@@ -121,6 +121,7 @@ public class Music : MonoBehaviour
 				if (push)
 				{
 					Debug.Log("Delta time: " + deltaTime);
+					_spawner.RemoveFluctuation(_hitNoteIndex);
 					AddScore( (deltaTime <= GameManager.Instance.coolTime));
 				}
 
@@ -184,9 +185,9 @@ public class Music : MonoBehaviour
 		_startShowTime = _spawner.reachGreyTime;
     }
 
-	void GenerateFluction()
+	void GenerateFluction(int index)
 	{
-		_spawner.SpawnFluctuation();
+		_spawner.SpawnFluctuation(index);
 		_showNoteIndex++;
 	}
 

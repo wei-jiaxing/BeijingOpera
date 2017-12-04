@@ -25,6 +25,7 @@ public class FluctuationSpawner : MonoBehaviour
 //    private List<float> rhythmicPointList;
 
     private int nextPointIndex = 0;
+	private Dictionary<int, GameObject> _noteObjs = new Dictionary<int, GameObject>();
 
 	// Use this for initialization
 	void Awake () 
@@ -38,6 +39,7 @@ public class FluctuationSpawner : MonoBehaviour
     {
         music = GameManager.Instance.music;
         audioSource = music.GetComponent<AudioSource>();
+		_noteObjs.Clear();
 //        bmp = _bmp;
 //        startTime = _startTime;
 //        endTime = _endTime;
@@ -101,55 +103,31 @@ public class FluctuationSpawner : MonoBehaviour
 		}
 	}
 
-	public void SpawnFluctuation()
+	public void SpawnFluctuation(int index)
 	{
 		GameObject go3 = Instantiate(fluctuation, fluctuationPoint.position, Quaternion.identity);
-		go3.GetComponent<Fluctuation>().Init(fluctuationSpeed);
+		go3.GetComponent<Fluctuation>().Init(index, fluctuationSpeed);
+		_noteObjs.Add(index, go3);
 		nextPointIndex++;
+	}
+
+	public void RemoveFluctuation(int index)
+	{
+		if (_noteObjs.ContainsKey(index))
+		{
+			GameObject.Destroy(_noteObjs[index]);
+			_noteObjs.Remove(index);
+		}
 	}
 
 	public void GenerateFluctuation()
 	{
-
 		startGenerate = true;
 	}
 
 	public void Stop()
 	{
 		startGenerate = false;
-	}
-
-
-	private IEnumerator _GenerateFluctuation()
-	{
-		float distance = greyLinePoint.position.x - fluctuationPoint.position.x;
-		float reachGreyTime = distance / fluctuationSpeed;
-
-
-		while (audioSource.time < (music.startTime - reachGreyTime))
-		{
-			yield return null;
-		}
-
-		if (audioSource.time >= (music.startTime - reachGreyTime))
-		{
-			GameObject go = Instantiate(fluctuation, fluctuationPoint.position, Quaternion.identity);
-			go.GetComponent<Fluctuation>().Init(fluctuationSpeed);
-			yield return new WaitForSecondsRealtime(60 / bmp);
-		}
-
-
-		while (audioSource.isPlaying)
-		{
-			GameObject go2 = Instantiate(fluctuation, fluctuationPoint.position, Quaternion.identity);
-			go2.GetComponent<Fluctuation>().Init(fluctuationSpeed);
-
-			yield return new WaitForSecondsRealtime(60 / bmp);
-
-		}
-		Debug.Log("finish");
-
-		yield return null;
 	}
 
 	void OnDrawGizmos()
