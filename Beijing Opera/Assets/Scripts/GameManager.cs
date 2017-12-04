@@ -91,7 +91,6 @@ public class GameManager : MonoBehaviour
         currentMusicData = musicDataList[index];
     }
 
-
 	public void Miss()
 	{
         missCount++;
@@ -101,7 +100,6 @@ public class GameManager : MonoBehaviour
 	{
         score++;
 	}
-
 
 	public void GameOver()
 	{

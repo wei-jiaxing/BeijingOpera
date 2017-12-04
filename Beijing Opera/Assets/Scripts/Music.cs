@@ -90,7 +90,6 @@ public class Music : MonoBehaviour
 
         GameManager.Instance.progressBar.SetProgress(audioSource.time / endTime);
 
-//		if (audioSource.time < startTime) return;
 
 		if (audioSource.time > endTime)
 		//if (audioSource.time >= audioSource.clip.length)
@@ -209,6 +208,4 @@ public class Music : MonoBehaviour
 	{
 		audioSource.Stop();
 	}
-
-
 }

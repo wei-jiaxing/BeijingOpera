@@ -27,13 +27,8 @@ public class CSVManager : MonoBehaviour {
 		_instance = this;
 	}
 
-	void Start(){
-//		_timing = new float[1024];
-//		_lineNum = new int[1024];
-	}
-
 	public List<float> LoadCSV(){
-		int i = 0, j;
+		int i = 0;
 		string filePath = filePass + MusicSelect.Instance.currentSelectedIndex;
 		TextAsset csv = Resources.Load (filePath) as TextAsset;
 		if (csv == null)
@@ -46,13 +41,8 @@ public class CSVManager : MonoBehaviour {
 
 			string line = reader.ReadLine ();
 			string[] values = line.Split (',');
-//			for (j = 0; j < values.Length; j++)
-			{
-//				_timing[i] = float.Parse( values [0] );
-//				_lineNum[i] = float.Parse( values [1] );
-				_timing.Add(float.Parse(values[0]));
-				_lineNum.Add(int.Parse(values[1]));
-			}
+			_timing.Add(float.Parse(values[0]));
+			_lineNum.Add(int.Parse(values[1]));
 			i++;
 		}
 		for (int k = 0; k < _timing.Count; k++)
