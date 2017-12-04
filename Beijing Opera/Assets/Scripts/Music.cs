@@ -124,8 +124,6 @@ public class Music : MonoBehaviour
 					_spawner.RemoveFluctuation(_hitNoteIndex);
 					AddScore( (deltaTime <= GameManager.Instance.coolTime));
 				}
-
-				image.color = Color.green;
 			}
 			else
 			{
@@ -136,7 +134,6 @@ public class Music : MonoBehaviour
 					Debug.Log("Miss!!!Delta time: " + deltaTime);
 					missed = true;
 				}
-				image.color = Color.white;
 			}
 
 
@@ -153,6 +150,7 @@ public class Music : MonoBehaviour
 				if (!pushed&!missed)
 				{
 					Miss();
+					_hitNoteIndex++;
 					missed = true;
 				}
 				pushed = false;
@@ -160,12 +158,7 @@ public class Music : MonoBehaviour
 			}
 		}
 
-
-
 		push = false;
-
-
-
 	}
 
     public void Set(float _bmp,float _startTime, float _endTime)
@@ -203,7 +196,6 @@ public class Music : MonoBehaviour
 	{
 		score = 0;
 		scoreText.text = "Miss";
-		_hitNoteIndex++;
 		GameManager.Instance.Miss();
 	}
 
