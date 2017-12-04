@@ -150,7 +150,6 @@ public class Music : MonoBehaviour
 				if (!pushed&!missed)
 				{
 					Miss();
-					_hitNoteIndex++;
 					missed = true;
 				}
 				pushed = false;
@@ -196,6 +195,7 @@ public class Music : MonoBehaviour
 	{
 		score = 0;
 		scoreText.text = "Miss";
+		_hitNoteIndex++;
 		GameManager.Instance.Miss();
 	}
 
