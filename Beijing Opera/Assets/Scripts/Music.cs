@@ -102,7 +102,7 @@ public class Music : MonoBehaviour
 		{
 			Debug.LogWarning("Spawn: " + _showNoteIndex + " |at time: " + audioSource.time);
 
-			GenerateFluction(_showNoteIndex, audioSource.time + _startShowTime - _noteTimeList[_showNoteIndex]);
+			GenerateFluction(_showNoteIndex, bmp, audioSource.time + _startShowTime - _noteTimeList[_showNoteIndex]);
 		}
 
 
@@ -174,12 +174,12 @@ public class Music : MonoBehaviour
 		_noteTimeList.AddRange(CSVManager.Instance.LoadCSV());
 		_showNoteIndex = _hitNoteIndex = 0;
 
-		_startShowTime = _spawner.reachGreyTime;
+		_startShowTime = _spawner.distance / GameManager.Instance.FluctuationSpeed;
     }
 
-	void GenerateFluction(int index, float delatTime = 0)
+	void GenerateFluction(int index, float bpm, float delatTime = 0)
 	{
-		_spawner.SpawnFluctuation(index, delatTime);
+		_spawner.SpawnFluctuation(index, bpm, delatTime);
 		_showNoteIndex++;
 	}
 

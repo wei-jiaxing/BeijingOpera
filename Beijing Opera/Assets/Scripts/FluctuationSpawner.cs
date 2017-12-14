@@ -11,7 +11,7 @@ public class FluctuationSpawner : MonoBehaviour
 	private float bmp;
 	private float fluctuationSpeed;
 	private float rhythmicPointTime;
-	private float distance;
+	public float distance;
 	public float reachGreyTime { get; private set; }
 
     private float startTime;
@@ -28,15 +28,15 @@ public class FluctuationSpawner : MonoBehaviour
 	void Awake () 
 	{
 		distance = greyLinePoint.position.x - fluctuationPoint.position.x;
-		fluctuationSpeed = GameManager.Instance.fluctuationSpeed;
-		reachGreyTime = distance / fluctuationSpeed;
 	}
 
     public void Load(float _bmp, float _startTime, float _endTime)
     {
 		_noteObjs.Clear();
 		_removeLines.Clear();
-//        bmp = _bmp;
+		fluctuationSpeed = GameManager.Instance.FluctuationSpeed;
+		Debug.Log(fluctuationSpeed);
+		bmp = _bmp;
 //        startTime = _startTime;
 //        endTime = _endTime;
 //        rhythmicPointTime = 60 / bmp;
@@ -57,7 +57,7 @@ public class FluctuationSpawner : MonoBehaviour
 		}
 	}
 
-	public void SpawnFluctuation(int index, float deltaTime)
+	public void SpawnFluctuation(int index, float bpm, float deltaTime)
 	{
 		if (startGenerate)
 		{

@@ -45,6 +45,15 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public float FluctuationSpeed
+	{
+		get
+		{
+			return (currentMusicData != null ? currentMusicData.bmp : 100)
+				/ 60 * fluctuationSpeed;
+		}
+	}
+
 	void Awake()
 	{
 		_instance = this;
