@@ -110,10 +110,9 @@ public class Music : MonoBehaviour
 
 
 		timer += Time.fixedDeltaTime;
-
 		if (_hitNoteIndex < _noteTimeList.Count && 
 			// 一番目のNoteから判断が始まる
-			audioSource.time - _noteTimeList[0] > GameManager.Instance.goodTime)
+			_noteTimeList[0] - audioSource.time < GameManager.Instance.goodTime)
 		{
 			float deltaTime = Mathf.Abs(audioSource.time - _noteTimeList[_hitNoteIndex]);
 			if (deltaTime <= GameManager.Instance.goodTime)
@@ -122,7 +121,7 @@ public class Music : MonoBehaviour
 				missed = false;
 				if (push)
 				{
-					Debug.Log("Delta time: " + deltaTime);
+					Debug.Log(_hitNoteIndex + "---Delta time: " + deltaTime);
 					bool coolOrGood = (deltaTime <= GameManager.Instance.coolTime);
 					_spawner.RemoveFluctuation(_hitNoteIndex, (coolOrGood? Color.blue : Color.green));
 					AddScore(coolOrGood);
