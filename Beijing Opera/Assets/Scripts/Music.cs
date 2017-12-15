@@ -24,6 +24,9 @@ public class Music : MonoBehaviour
 	public Button button;
     public Sprite normal;
     public Sprite press;
+	public GameObject coolEffect;
+	public GameObject goodEffect;
+
     private Image image;
 
 	private bool push;
@@ -189,6 +192,10 @@ public class Music : MonoBehaviour
 		scoreText.text = score+" Combo" + (coolOrGood? " <color=blue>Cool</color>" : " <color=green>Good</color>");
 		_hitNoteIndex++;
 		GameManager.Instance.AddScore();
+
+		var effect = Instantiate(coolOrGood ? coolEffect : goodEffect) as GameObject;
+		effect.transform.position = _spawner.greyLinePoint.position;
+		effect.SetActive(true);
 	}
 
 	public void Miss()
