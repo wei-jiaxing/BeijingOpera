@@ -90,7 +90,6 @@ public class Music : MonoBehaviour
 
         GameManager.Instance.progressBar.SetProgress(audioSource.time / endTime);
 
-//		if (audioSource.time < startTime) return;
 
 		if (audioSource.time > endTime)
 		//if (audioSource.time >= audioSource.clip.length)
@@ -103,7 +102,7 @@ public class Music : MonoBehaviour
 		{
 			Debug.LogWarning("Spawn: " + _showNoteIndex + " |at time: " + audioSource.time);
 
-			GenerateFluction();
+			GenerateFluction(_showNoteIndex, bmp, audioSource.time + _startShowTime - _noteTimeList[_showNoteIndex]);
 		}
 
 
@@ -121,10 +120,10 @@ public class Music : MonoBehaviour
 				if (push)
 				{
 					Debug.Log("Delta time: " + deltaTime);
-					AddScore( (deltaTime <= GameManager.Instance.coolTime));
+					bool coolOrGood = (deltaTime <= GameManager.Instance.coolTime);
+					_spawner.RemoveFluctuation(_hitNoteIndex, (coolOrGood? Color.blue : Color.green));
+					AddScore(coolOrGood);
 				}
-
-				image.color = Color.green;
 			}
 			else
 			{
@@ -135,7 +134,6 @@ public class Music : MonoBehaviour
 					Debug.Log("Miss!!!Delta time: " + deltaTime);
 					missed = true;
 				}
-				image.color = Color.white;
 			}
 
 
@@ -159,12 +157,7 @@ public class Music : MonoBehaviour
 			}
 		}
 
-
-
 		push = false;
-
-
-
 	}
 
     public void Set(float _bmp,float _startTime, float _endTime)
@@ -181,12 +174,12 @@ public class Music : MonoBehaviour
 		_noteTimeList.AddRange(CSVManager.Instance.LoadCSV());
 		_showNoteIndex = _hitNoteIndex = 0;
 
-		_startShowTime = _spawner.reachGreyTime;
+		_startShowTime = _spawner.distance / GameManager.Instance.FluctuationSpeed;
     }
 
-	void GenerateFluction()
+	void GenerateFluction(int index, float bpm, float delatTime = 0)
 	{
-		_spawner.SpawnFluctuation();
+		_spawner.SpawnFluctuation(index, bpm, delatTime);
 		_showNoteIndex++;
 	}
 
@@ -215,6 +208,4 @@ public class Music : MonoBehaviour
 	{
 		audioSource.Stop();
 	}
-
-
 }
