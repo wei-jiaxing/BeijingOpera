@@ -680,7 +680,7 @@ Transform:
   m_GameObject: {fileID: 615210597}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 6.4, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1.5, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 660131085}
   m_RootOrder: 1
@@ -954,7 +954,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 892487878}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.44, y: 0, z: 0}
+  m_LocalPosition: {x: -9.5, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 660131085}
@@ -1113,7 +1113,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 918830982}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.059999995, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 136.40482, y: 0.21780002, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2047,6 +2047,8 @@ MonoBehaviour:
   button: {fileID: 1578118631}
   normal: {fileID: 21300000, guid: bebd76b918e6b9043aab6b49895385e0, type: 3}
   press: {fileID: 21300000, guid: 8f3071b608130424f881b562fee32cbc, type: 3}
+  coolEffect: {fileID: 1203768006312174, guid: 4a2e294430da6be4f8be07cc04ffe079, type: 2}
+  goodEffect: {fileID: 1203768006312174, guid: a3baf1cc9343e4aaaa6ebe4a7aef9f1e, type: 2}
 --- !u!4 &1680458749
 Transform:
   m_ObjectHideFlags: 0
